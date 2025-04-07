@@ -5,7 +5,7 @@ import { BadRequestException,Controller ,Get,Req,Post,HttpCode, Body, BadGateway
 @Injectable()
 export class OpenaiService {
     private readonly OpenAI =new OpenAI({
-        apiKey:process.env.OPEN_KEY,
+        apiKey:process.env.OPENAI_API_KEY,
 
 
     });
