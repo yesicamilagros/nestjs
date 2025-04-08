@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpCode, Post, Req } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, Post, Req ,Res} from '@nestjs/common';
 import { Request, response } from 'express';
 import {HttpService} from '@nestjs/axios';
 import * as process from 'node:process';
@@ -19,8 +19,8 @@ export class WhatsappController {
   ){}
 
     @Get('webhook')
-    whatsappVerificationChallenge(@Req() request:Request){
-        const mode = request.query['hub.mode'];
+    whatsappVerificationChallenge(@Req() request:Request, @Res() response: any){
+        /*const mode = request.query['hub.mode'];
         const challenge = request.query['hub.challenge'];
         const token = request.query['hub.verify_token'];
         const verificationToken = process.env.WHATSAPP_CLOUD_API_WEBHOOK_VERIFICATION_TOKEN;
@@ -33,6 +33,18 @@ if(mode === 'subscribe' && token === verificationToken){
 
     return challenge?.toString();
 }
+
+*/   const mode = request.query['hub.mode'];
+  const challenge = request.query['hub.challenge'];
+  const token = request.query['hub.verify_token'];
+  const verificationToken = process.env.WHATSAPP_CLOUD_API_WEBHOOK_VERIFICATION_TOKEN;
+
+  if (mode && token && mode === 'subscribe' && token === verificationToken) {
+    return response.status(200).send(challenge);
+  } else {
+    return response.sendStatus(403); // O cualquier otro código
+  }
+
     } 
 
 
