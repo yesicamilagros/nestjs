@@ -19,26 +19,19 @@ export class WhatsappController {
 
     @Get('webhook')
     whatsappVerificationChallenge(@Req() request:Request){
-        const mode = request.query['hub.mode'] as string;
-    const challenge = request.query['hub.challenge'] as string;
-    const token = request.query['hub.verify_token'] as string;
-    const verificationToken = process.env.WHATSAPP_CLOUD_API_WEBHOOK_VERIFICATION_TOKEN;
+        const mode = request.query['hub.mode'];
+        const challenge = request.query['hub.challenge'];
+        const token = request.query['hub.verify_token'];
+        const verificationToken = process.env.WHATSAPP_CLOUD_API_WEBHOOK_VERIFICATION_TOKEN;
+if(!mode || !token){
 
-   // this.logger.log(`Received: mode=${mode}, token=${token}, challenge=${challenge}`); // Agregamos log para depurar
+    return 'Error verifing Token yesica';
+}
 
-    // Verificación básica de parámetros
-    if (!mode || !token) {
-      return 'Error verifying Token';
-    }
+if(mode === 'subscribe' && token === verificationToken){
 
-    // Verificación del token
-    if (mode === 'subscribe' && token === verificationToken) {
-      return challenge ?? 'Error: No challenge provided'; // Retorna challenge o un mensaje si no está disponible
-    }
-
-    return 'Error verifying Token'; // Si no pasa la validación del token
-  }
-
+    return challenge?.toString();
+}
     } 
 
 
