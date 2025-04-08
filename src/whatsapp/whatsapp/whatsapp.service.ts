@@ -48,7 +48,7 @@ export class WhatsappService {
                                                   pipe(
                                                     catchError( (error) =>{
                                                         this.logger.error(error);
-                                                        throw new BadGatewayException( 'error posting a whatssapp cloud');
+                                                        throw new BadRequestException( 'error posting a whatssapp cloud',);
                                                     }),
                                                   );
 

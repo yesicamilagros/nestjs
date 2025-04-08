@@ -1,4 +1,4 @@
-import { BadRequestException,Controller ,Get,Req,Post,HttpCode, Body, BadGatewayException,Logger,} from '@nestjs/common';
+import { BadRequestException,Controller ,Get,Req,Post,HttpCode, Body, BadGatewayException,Logger, Query ,} from '@nestjs/common';
 import { Request, response } from 'express';
 import {HttpService} from '@nestjs/axios';
 import * as process from 'node:process';
@@ -38,7 +38,7 @@ if(mode === 'subscribe' && token===verificationToken){
 
         @Post('webhook')
         @HttpCode(200)
-        async handleIncomingWhatsappMessage( @Body() request:any){
+        async handleIncomingWhatsappMessage(@Body() request:any){
 
             const {messages} =request?.entry?.[0]?.changes?.[0].value ?? {};
             if (!messages) return;
