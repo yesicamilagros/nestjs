@@ -24,7 +24,7 @@ export class WhatsappController {
   const token = request.query['hub.verify_token'];
   const verificationToken = process.env.WHATSAPP_CLOUD_API_WEBHOOK_VERIFICATION_TOKEN;
 
-  this.logger.log(`Received mode: ${mode}, token: ${token}, challenge: ${challenge}`); // Para depurar
+  //this.logger.log(`Received mode: ${mode}, token: ${token}, challenge: ${challenge}`); // Para depurar
 
   // Si no hay modo o token, retornamos error
   if (!mode || !token) {
