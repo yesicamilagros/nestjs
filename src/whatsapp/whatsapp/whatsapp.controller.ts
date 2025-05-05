@@ -1,5 +1,5 @@
 import { Body, Controller, Get, HttpCode, Post, Req ,Res} from '@nestjs/common';
-import { Request, response } from 'express';
+import { Request, Response } from 'express';
 import {HttpService} from '@nestjs/axios';
 import * as process from 'node:process';
 import { catchError,lastValueFrom, map } from 'rxjs';
@@ -19,7 +19,7 @@ export class WhatsappController {
   ){}
 
     @Get('/webhook')
-    whatsappVerificationChallenge(@Req() request:Request, @Res() response: any){
+    whatsappVerificationChallenge(@Req() request:Request, @Res() response: Response){
         /*const mode = request.query['hub.mode'];
         const challenge = request.query['hub.challenge'];
         const token = request.query['hub.verify_token'];
@@ -53,7 +53,7 @@ if(mode === 'subscribe' && token === verificationToken){
         async handleIncomingWhatsappMessage(@Body() request:any){
 
             const {messages} =request?.entry?.[0]?.changes?.[0].value ?? {};
-            if (!messages) return;
+            if (!messages) return 'no messages received';
 
             const message = messages[0];
             const messageSender = message.from;
