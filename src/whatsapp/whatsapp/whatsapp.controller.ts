@@ -18,7 +18,7 @@ export class WhatsappController {
 
   ){}
 
-    @Get('webhook')
+    @Get('/webhook')
     whatsappVerificationChallenge(@Req() request:Request, @Res() response: any){
         /*const mode = request.query['hub.mode'];
         const challenge = request.query['hub.challenge'];
@@ -48,7 +48,7 @@ if(mode === 'subscribe' && token === verificationToken){
     } 
 
 
-        @Post('webhook')
+        @Post('/webhook')
         @HttpCode(200)
         async handleIncomingWhatsappMessage(@Body() request:any){
 
